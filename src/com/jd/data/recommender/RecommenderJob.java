@@ -4,9 +4,11 @@ package com.jd.data.recommender;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
+import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.TextInputFormat;
 import org.apache.hadoop.mapred.TextOutputFormat;
@@ -23,7 +25,7 @@ public final class RecommenderJob extends Configured implements Tool{
 		
         job.setJobName("Recommend");
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+        job.setOutputValueClass(MapWritable.class);
         job.setMapperClass(ToItemPrefMapper.class);
         job.setCombinerClass(ToUserVectorReducer.class);
         
@@ -33,6 +35,7 @@ public final class RecommenderJob extends Configured implements Tool{
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
         
+        JobClient.runJob(job);
 		return 0;
 	}
 

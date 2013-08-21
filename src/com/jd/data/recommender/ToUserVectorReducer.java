@@ -6,7 +6,7 @@ import java.util.*;
 import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.io.*;
 
-public class ToUserVectorReducer extends MapReduceBase implements Reducer<Text, Text, Text, MapWritable>{
+public class ToUserVectorReducer extends MapReduceBase implements Reducer<Text, Text, Text, MapWritable> {
 
 	@Override
 	public void reduce(Text key, Iterator<Text> values,
