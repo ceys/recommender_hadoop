@@ -24,10 +24,13 @@ public final class RecommenderJob extends Configured implements Tool{
 		JobConf job = new JobConf(conf, RecommenderJob.class);
 		
         job.setJobName("Recommend");
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(MapWritable.class);
+
         job.setMapperClass(ToItemPrefMapper.class);
-        job.setCombinerClass(ToUserVectorReducer.class);
+        //job.setCombinerClass(ToUserVectorReducer.class);
         
         job.setInputFormat(TextInputFormat.class);
         job.setOutputFormat(TextOutputFormat.class);

@@ -22,6 +22,7 @@ public class ToUserVectorReducer extends MapReduceBase implements Reducer<Text, 
 			}
 		}
 		// user \ [itemid:1.0, itemid2:1.0]
+		
 		output.collect(key, item_map);
 	}
 
